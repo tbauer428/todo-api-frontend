@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import axios from "axios";
 import Todo from "./components/Todo";
+import Input from "./components/Input";
 
 class App extends React.Component {
   constructor(props) {
@@ -48,12 +49,21 @@ class App extends React.Component {
       .then(() => this.loadTodos());
   };
 
+  handleNewTodo = input => {
+    axios
+      .post(`/todos/add`, {
+        todoText: input,
+        completed: false
+      })
+      .then(() => this.loadTodos());
+  };
+
   render() {
     return (
       <div className="App">
         <div>#todo-api</div>
         <div onClick={e => this.loadTodos()}>load todos</div>
-
+        <Input placeholder="Enter a New Todo" submit={this.handleNewTodo} />
         {this.state.data.map(todo => {
           return (
             <Todo
