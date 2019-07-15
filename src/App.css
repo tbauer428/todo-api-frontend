@@ -4,3 +4,7 @@
   color: white;
   min-height: 100vh;
 }
+
+.complete {
+  text-decoration: line-through;
+}
