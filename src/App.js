@@ -10,7 +10,9 @@ class App extends React.Component {
     this.state = { data: [] };
   }
 
-  parseTodos = () => {};
+  componentDidMount = () => {
+    this.loadTodos();
+  };
 
   loadTodos = e => {
     axios.get("/todos").then(response => {
@@ -25,8 +27,7 @@ class App extends React.Component {
   };
 
   handleDelete = (e, id) => {
-    axios.delete(`/todos/delete/${id}`);
-    this.loadTodos(e);
+    axios.delete(`/todos/delete/${id}`).then(() => this.loadTodos());
   };
 
   handleEdit = (e, id, completed, text) => {
